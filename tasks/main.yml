@@ -1,0 +1,37 @@
+- name: "Create traefik folder"
+  file:
+    path: "/opt/traefik"
+    state: directory
+    mode: 0755
+  become: yes
+
+- name: "Download traefik"
+  get_url:
+    url: "https://github.com/containous/traefik/releases/download/v{{ traefik_version }}/traefik_linux-amd64"
+    dest: "/opt/traefik/traefik"
+    mode: 0755
+  become: yes
+
+- name: Copy config.yml
+  copy:
+    src: "{{ traefik_config }}"
+    dest: /opt/traefik/config.toml
+    mode: 0600
+  become: yes
+  notify: restart traefik
+
+- name: Template out the service file
+  template:
+    src: traefik.service.j2
+    dest: /etc/systemd/system/traefik.service
+    mode: 0644
+  become: yes
+  notify:
+    - reload systemd
+    - restart traefik
+
+- name: Enable traefik
+  systemd:
+    name: traefik
+    enabled: yes
+  become: yes

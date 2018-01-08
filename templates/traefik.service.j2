@@ -1,0 +1,11 @@
+[Unit]
+Description=Traefik Web Server
+After=network-online.target
+
+[Service]
+Restart=on-failure
+WorkingDirectory=/opt/traefik
+ExecStart=/opt/traefik/traefik --configfile=/opt/traefik/config.toml
+
+[Install]
+WantedBy=multi-user.target

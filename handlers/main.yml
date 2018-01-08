@@ -1,0 +1,10 @@
+---
+- name: reload systemd
+  command: systemctl daemon-reload
+  become: true
+
+- name: restart traefik
+  service:
+    name: traefik
+    state: restarted
+  become: true

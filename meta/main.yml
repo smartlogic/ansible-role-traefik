@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Eric Oestrich
+  description: Set up traefik web proxy
+  company: SmartLogic
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - http
+    - traefik
+dependencies: []
