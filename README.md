@@ -27,7 +27,7 @@ None
 ## Example Configuration
 
 ```yaml
-traefik_confige "{{ playbook_dir }}/files/traefik-config.toml"
+traefik_config: "{{ playbook_dir }}/files/traefik-config.toml"
 ```
 
 ## Example Playbook
