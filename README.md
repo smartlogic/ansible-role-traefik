@@ -2,6 +2,14 @@
 
 Basic traefik configuration
 
+## Install to requirements.yml
+
+```
+- src: git+git@github.com:smartlogic/ansible-role-traefik
+  name: traefik
+  version: 0.1.0
+```
+
 ## Requirements
 
 None
@@ -27,7 +35,7 @@ traefik_confige "{{ playbook_dir }}/files/traefik-config.toml"
 ```yaml
 - hosts: servers
   roles:
-    - { role: smartlogic.traefik }
+    - { role: traefik }
 ```
 
 ## License
