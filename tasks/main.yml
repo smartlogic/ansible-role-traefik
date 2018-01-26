@@ -5,11 +5,19 @@
     mode: 0755
   become: yes
 
+- name: "Create traefik version folder"
+  file:
+    path: "/opt/traefik/{{ traefik_version }}"
+    state: directory
+    mode: 0755
+  become: yes
+
 - name: "Download traefik"
   get_url:
     url: "https://github.com/containous/traefik/releases/download/v{{ traefik_version }}/traefik_linux-amd64"
-    dest: "/opt/traefik/traefik"
+    dest: "/opt/traefik/{{ traefik_version }}/traefik"
     mode: 0755
+    checksum: "sha256:{{ traefik_checksum }}"
   become: yes
 
 - name: Copy config.yml
