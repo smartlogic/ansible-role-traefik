@@ -1,4 +1,5 @@
 ---
-traefik_version: 1.5.0
-traefik_checksum: f5bad64d95377a890f7e04640f6356df41c7c196b317a0f8f76a952979dbea50
+traefik_version: 2.2.1
+traefik_checksum: 04139683e0cd6fc4e98eae9d469490d1a85074a0d810f640296f81991763657c
 traefik_config: "config.toml"
+traefik_config_files: []

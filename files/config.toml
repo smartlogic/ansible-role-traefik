@@ -1,10 +1,20 @@
-defaultEntryPoints = ["http"]
+[global]
+  checkNewVersion = false
+  sendAnonymousUsage = false
+
+[providers]
+  [providers.file]
+     directory = "/opt/traefik/config"
+     watch = true
 
 [entryPoints]
-  [entryPoints.http]
-  address = ":80"
+  [entryPoints.web]
+    address = ":80"
+    [entryPoints.web.http]
+      [entryPoints.web.http.redirections]
+        [entryPoints.web.http.redirections.entryPoint]
+          to = "websecure"
+          scheme = "https"
 
-[web]
-address = ":8080"
-  [web.metrics.prometheus]
-  buckets=[0.1,0.3,1.2,5.0]
+  [entryPoints.websecure]
+    address = ":443"

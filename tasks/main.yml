@@ -14,19 +14,41 @@
 
 - name: "Download traefik"
   get_url:
-    url: "https://github.com/containous/traefik/releases/download/v{{ traefik_version }}/traefik_linux-amd64"
-    dest: "/opt/traefik/{{ traefik_version }}/traefik"
+    url: "https://github.com/containous/traefik/releases/download/v{{ traefik_version }}/traefik_v{{ traefik_version }}_linux_amd64.tar.gz"
+    dest: "/opt/traefik/{{ traefik_version }}/traefik.tar.gz"
     mode: 0755
     checksum: "sha256:{{ traefik_checksum }}"
   become: yes
 
-- name: Copy config.yml
+- name: "Unarchive traefik"
+  unarchive:
+    src: "/opt/traefik/{{ traefik_version }}/traefik.tar.gz"
+    dest: "/opt/traefik/{{ traefik_version }}"
+    remote_src: yes
+  become: yes
+
+- name: "Create traefik config folder"
+  file:
+    path: "/opt/traefik/config"
+    state: directory
+    mode: 0755
+  become: yes
+
+- name: Copy config.toml
   copy:
     src: "{{ traefik_config }}"
     dest: /opt/traefik/config.toml
     mode: 0600
   become: yes
   notify: restart traefik
+
+- name: Place config files
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/traefik/config/"
+    mode: 0600
+  become: yes
+  with_items: "{{ traefik_config_files }}"
 
 - name: Template out the service file
   template:
