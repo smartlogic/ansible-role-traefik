@@ -7,7 +7,7 @@ Basic traefik configuration
 ```
 - src: git+git@github.com:smartlogic/ansible-role-traefik
   name: traefik
-  version: 0.2.0
+  version: 1.0.0
 ```
 
 ## Requirements
