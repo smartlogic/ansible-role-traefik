@@ -60,6 +60,9 @@
     - reload systemd
     - restart traefik
 
+- name: Force systemd to reload if we modified the service config
+  ansible.builtin.meta: flush_handlers
+
 - name: Enable traefik
   systemd:
     name: traefik

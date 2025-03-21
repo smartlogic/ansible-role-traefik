@@ -6,6 +6,7 @@ After=network-online.target
 Restart=on-failure
 WorkingDirectory=/opt/traefik
 ExecStart=/opt/traefik/{{ traefik_version }}/traefik --configfile=/opt/traefik/config.toml
+LimitNOFILE={{ traefik_open_file_limit }}
 
 [Install]
 WantedBy=multi-user.target
