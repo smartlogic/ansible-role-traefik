@@ -29,7 +29,7 @@
 
 - name: "Create traefik config folder"
   file:
-    path: "/opt/traefik/config"
+    path: "{{ traefik_config_dir }}"
     state: directory
     mode: 0755
   become: yes
@@ -45,7 +45,7 @@
 - name: Place config files
   copy:
     src: "{{ item }}"
-    dest: "/opt/traefik/config/"
+    dest: "{{ traefik_config_dir }}/"
     mode: 0600
   become: yes
   with_items: "{{ traefik_config_files }}"
